@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="mysql" targetRuntime="MyBatis3">
+        <!--修改Mapper后缀为Dao-->
+        <plugin type="io.github.smart.cloud.mybatis.generator.adapter.plugin.RenameJavaMapperPlugin">
+            <property name="searchString" value="Mapper"/>
+            <property name="replaceString" value="Dao"/>
+        </plugin>
+        <!--移除分表表名后缀下标-->
+        <plugin type="io.github.smart.cloud.mybatis.generator.adapter.plugin.RenameSqlMapperTableNamePlugin"/>
+        <!--Dao类Mapper注解-->
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin"/>
+        <!--覆盖XxxMap.xml-->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!-- 数据库链接URL、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://192.168.15.67:3306/anti_fraud_audit_analy_xx_yy_db"
+                        userId="root"
+                        password="123456">
+            <!--使用了 mysql-connector-java-8.0.15.jar 或 其他高版本的mysql数据库驱动必须添加下面配置，否则不会生产xxxxByPrimaryKey方法-->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+
+        <!-- 生成模型的包名和位置 -->
+        <javaModelGenerator targetPackage="com.fenqile.anti_fraud.auditanaly.data.domain"
+                            targetProject="D:/generateCode/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+
+        </javaModelGenerator>
+        <!-- 生成的映射文件包名和位置 -->
+        <sqlMapGenerator targetPackage="mappers" targetProject="D:/generateCode/src/main/resources/">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- 生成DAO的包名和位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.fenqile.anti_fraud.auditanaly.data.dao"
+                             targetProject="D:/generateCode/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="t_audit_analy_parent_snapshot_0" domainObjectName="AuditAnalyParentSnapshot">
+            <columnRenamingRule searchString="^F" replaceString=""/>
+        </table>
+        <table tableName="t_audit_analy_parent_snapshot_water_0" domainObjectName="AuditAnalyParentSnapshotWater">
+            <columnRenamingRule searchString="^F" replaceString=""/>
+        </table>
+    </context>
+</generatorConfiguration>
