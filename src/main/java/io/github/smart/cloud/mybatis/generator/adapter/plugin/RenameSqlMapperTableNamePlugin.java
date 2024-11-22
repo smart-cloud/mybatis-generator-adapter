@@ -17,6 +17,7 @@ public class RenameSqlMapperTableNamePlugin extends PluginAdapter {
     public RenameSqlMapperTableNamePlugin() {
     }
 
+    @Override
     public boolean validate(List<String> warnings) {
         return true;
     }
